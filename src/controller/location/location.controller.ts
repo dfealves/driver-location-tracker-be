@@ -10,6 +10,7 @@ export class LocationController {
     async createLocation(@Body() data: { latitude: number, longitude: number, userId: string }) {
         console.log('entrei no componente de POST controller')
         const userId = new ObjectId().toHexString();
+        console.log('userID', userId)
         try {
             await this.locationService.createLocation(data.latitude, data.longitude, userId);
             return {
