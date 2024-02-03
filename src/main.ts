@@ -4,18 +4,18 @@ import * as cors from 'cors';
 import * as fs from 'fs';
 
 async function bootstrap() {
-  // const keyPath = './key.pem';
-  // const certPath = './cert.pem';
+  const keyPath = './key.pem';
+  const certPath = './cert.pem';
   
-  // const key = fs.readFileSync(keyPath);
-  // const cert = fs.readFileSync(certPath)
+  const key = fs.readFileSync(keyPath);
+  const cert = fs.readFileSync(certPath)
 
-  // const httpsOptions = {
-  //   key: key,
-  //   cert: cert,
-  // };
+  const httpsOptions = {
+    key: key,
+    cert: cert,
+  };
   
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { httpsOptions});
   app.use(cors({
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: false,
