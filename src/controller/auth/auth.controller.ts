@@ -9,7 +9,6 @@ export class AuthController {
     @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Request() req) {
-        console.log('entrei no controller de login');
         return this.authService.login(req.user)
     }
 }
