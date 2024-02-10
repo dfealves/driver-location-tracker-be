@@ -5,13 +5,11 @@ import { LocationService } from "src/service/location/location.service";
 export class UpdateLocationController {
     constructor(private readonly service: LocationService) { }
 
-    @Patch('location/:userId')
     async updateLocation(
-        @Param('userId') userId: string,
-        @Body() data: { latitude: number, longitude: number }
+         data: {id: string, latitude: number, longitude: number }
     ) {
         try {
-            await this.service.updateLocation(userId,
+            await this.service.updateLocation(data.id,
                 data.latitude, data.longitude
             )
             return {

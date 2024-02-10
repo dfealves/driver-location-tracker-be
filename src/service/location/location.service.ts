@@ -1,14 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { ObjectId } from "mongodb";
-;
-
 @Injectable()
 export class LocationService {
     constructor(private readonly prisma: PrismaService) { }
 
     async createLocation(latitude: number, longitude: number, userId: string) {
-        console.log('POST')
         return this.prisma.prisma.location.create({
             data: { latitude, longitude, userId }
         })
