@@ -26,6 +26,7 @@ export class LocationService {
             data: {
                 latitude,
                 longitude,
+                updatedAt: new Date(),
             },
         });
         const locationAfterUpdate = await prisma.location.findUnique({
