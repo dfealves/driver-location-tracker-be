@@ -20,7 +20,7 @@ export class LocationGateway implements OnGatewayConnection {
     client.broadcast.emit('Location', data);
   }
 
-  @SubscribeMessage('Location Update')
+  @SubscribeMessage('Position Update')
   handleLocationUpdate(@MessageBody() data: any) {
     console.log('Nova atualização de localização:', data);
 
