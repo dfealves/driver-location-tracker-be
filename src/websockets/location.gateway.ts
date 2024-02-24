@@ -3,7 +3,7 @@ import { Server, Socket } from 'socket.io';
 import { LocationService } from 'src/service/location/location.service';
 
 
-@WebSocketGateway(3001, { namespace: '/location', cors: true })
+@WebSocketGateway({ namespace: '/location', cors: true })
 export class LocationGateway implements OnGatewayConnection {
   @WebSocketServer() server: Server;
   private port;
