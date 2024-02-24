@@ -86,5 +86,9 @@
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
+  },
+  "engines": {
+    "node": "21.x",
+    "npm": "10.4.0"
   }
 }
