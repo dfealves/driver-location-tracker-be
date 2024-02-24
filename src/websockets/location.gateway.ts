@@ -3,7 +3,7 @@ import { Server, Socket } from 'socket.io';
 import { LocationService } from 'src/service/location/location.service';
 
 
-@WebSocketGateway({ namespace: '/location', cors: true })
+@WebSocketGateway(3001, { namespace: '/location', cors: true })
 export class LocationGateway implements OnGatewayConnection {
   @WebSocketServer() server: Server;
   private port;
@@ -29,7 +29,7 @@ export class LocationGateway implements OnGatewayConnection {
 
     // Envie a atualização de localização para outros clientes WebSocket, se necessário
     this.service.updateLocation(data.userId, data.latitude, data.longitude)
-    this.server.of('/location').emit('locationUpdate', data);
+    this.server.emit('locationUpdate', data);
   }
 
 }
