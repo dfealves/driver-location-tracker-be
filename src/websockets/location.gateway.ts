@@ -3,10 +3,13 @@ import { Server, Socket } from 'socket.io';
 import { LocationService } from 'src/service/location/location.service';
 
 
-@WebSocketGateway(3001, { namespace: '/location', cors: true })
+@WebSocketGateway({ namespace: '/location', cors: true })
 export class LocationGateway implements OnGatewayConnection {
   @WebSocketServer() server: Server;
-  constructor(private service: LocationService) { }
+  private port;
+  constructor(private service: LocationService) {
+    this.port = process.env.PORT || 3001;
+   }
 
   handleConnection(client: any, ...args: any[]) {
     console.log(`Cliente conectado ${client.id}`)
@@ -26,7 +29,7 @@ export class LocationGateway implements OnGatewayConnection {
 
     // Envie a atualização de localização para outros clientes WebSocket, se necessário
     this.service.updateLocation(data.userId, data.latitude, data.longitude)
-    this.server.emit('locationUpdate', data);
+    this.server.of('/location').emit('locationUpdate', data);
   }
 
 }
