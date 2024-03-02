@@ -7,7 +7,7 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
   app.use(cors({
-    origin: ['*' ,'https://e198-2804-14d-7e3d-8dce-d49c-4ac2-27c4-4e30.ngrok-free.app'],
+    origin: ['*' ,'https://2b64-2804-14d-7e3d-8dce-9127-5f47-1575-f29d.ngrok-free.app'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
   }));  

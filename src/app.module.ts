@@ -15,6 +15,8 @@ import { LocalStrategy } from './service/strategy/local.strategy';
 import { JwtStrategy } from './service/strategy/jwt.strategy';
 import { LocalAuthGuard } from './guard/local-auth.guard';
 import { AuthModule } from './module/auth.module';
+import { RouteService } from './service/route/route.service';
+import { RouteController } from './controller/route/route.controller';
 
 @Module({
   imports: [
@@ -24,13 +26,14 @@ import { AuthModule } from './module/auth.module';
     AppController,
     LocationController,
     UpdateLocationController,
+    RouteController
   ],
   providers: [
     AppService,
     LocationGateway,
     PrismaService,
     LocationService,
-   
+    RouteService
   ],
 })
 export class AppModule { }

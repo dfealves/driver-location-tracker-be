@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 async function seed() {
     const user = await prisma.user.create({
         data: {
-            username: 'dfealves',
-            email: 'daniloferreira.alves@outlook.com',
+            username: 'dfealves-driver',
+            email: 'daniloferreira.alves@gmail.com',
             password: '*A77b89k',
-            type: 'ADMIN',
+            type: 'DRIVER',
         }
     })
 
@@ -19,6 +19,27 @@ async function seed() {
             userId: user.id
         }
     });
+
+    const existingUser = await prisma.user.findUnique({
+        where: { username: 'dfealves' },
+    });
+
+    if (existingUser) {
+        // Se o usuário existir, obtenha o ID do usuário
+        const userId = existingUser.id;
+
+        // Crie a rota associada ao usuário
+        const route = await prisma.route.create({
+            data: {
+                destination: 'Av. Brigadeiro Faria Lima, 3064 - Itaim Bibi, São Paulo - SP, 01451-001',
+                userId: userId,
+            }
+        });
+
+        console.log('Rota criada para o usuário:', route);
+    } else {
+        console.log('Usuário não encontrado, seed ignorado.');
+    }
 
     console.log('Seed concluído')
 }
