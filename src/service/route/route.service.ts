@@ -4,6 +4,27 @@ import { PrismaService } from "../prisma/prisma.service";
 @Injectable()
 export class RouteService {
     constructor(private readonly prisma: PrismaService) { }
+
+    async createRoute(userId: string, destination: string, owner: string): Promise<any> {
+        const { prisma } = this.prisma;
+        const user = await prisma.user.findUnique({
+            where: { id: userId }
+        });
+
+        if (!user) {
+            throw new NotFoundException(`Usuário com o ID ${userId} não foi encontrado`)
+        };
+
+        const route = await prisma.route.create({
+            data: {
+                destination,
+                owner,
+                userId
+            }
+        })
+        return route;
+    }
+
     async getRoutesByUserId(userId: string): Promise<any[]> {
         const { prisma } = this.prisma;
 

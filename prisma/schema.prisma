@@ -18,7 +18,7 @@ model User {
     locations          Location[]
     refreshToken       String?
     resetPasswordToken String?
-    routes              Route[]
+    routes             Route[]
 }
 
 model Location {
@@ -34,6 +34,7 @@ model Location {
 model Route {
     id          String   @id @default(auto()) @map("_id") @db.ObjectId
     destination String
+    owner       String
     userId      String   @db.ObjectId
     user        User     @relation(fields: [userId], references: [id])
     createdAt   DateTime @default(now())
